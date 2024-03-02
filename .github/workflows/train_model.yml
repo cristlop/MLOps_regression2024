@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-        pip install wandb==0.16.3 scikit-learn==0.24.2 matplotlib --upgrade  # Actualizar wandb, scikit-learn y matplotlib
+        pip install wandb scikit-learn matplotlib --upgrade  # Actualizar wandb, scikit-learn y matplotlib
 
     - name: Show installed packages
       run: pip freeze
