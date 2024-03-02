@@ -1,16 +1,9 @@
 import warnings
-import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
-from sklearn.svm import SVC
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LinearRegression
-from sklearn.linear_model import Ridge
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.cluster import KMeans
-from sklearn import datasets, cluster
+from sklearn import datasets
 from sklearn.model_selection import train_test_split
-from sklearn.utils.class_weight import compute_class_weight
+from sklearn.linear_model import Ridge
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.exceptions import ConvergenceWarning
 
 # Importar W&B e iniciar sesión
@@ -42,16 +35,23 @@ run = wandb.init(project='MLOps_regression2024', name="regression")
 
 # Visualizar el rendimiento del modelo
 
-# Parcela residual
-# Mide y traza los valores objetivo previstos (eje y) frente a la diferencia entre los valores objetivo reales y previstos (eje x), 
-# así como la distribución del error residual.
+# Curva de Aprendizaje
+wandb.sklearn.plot_learning_curve(reg, X_train, y_train)
+
+# Parcela Residual
 wandb.sklearn.plot_residuals(reg, X_train, y_train)
 
-# Candidato atípico
-# Mide la influencia de un punto de datos en el modelo de regresión a través de la distancia de Cook.
-# Los casos con influencias muy sesgadas podrían ser potencialmente valores atípicos. Útil para la detección de valores atípicos.
-wandb.sklearn.plot_outlier_candidates(reg, X_train, y_train)
+# Obtener predicciones en el conjunto de prueba
+y_pred = reg.predict(X_test)
 
-wandb.sklearn.plot_regressor(reg, X_train, X_test, y_train, y_test, model_name='Ridge')
+# Calcular métricas
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+# Imprimir métricas
+print(f"Mean Absolute Error (MAE): {mae}")
+print(f"Mean Squared Error (MSE): {mse}")
+print(f"R2 Score: {r2}")
 
 wandb.finish()
