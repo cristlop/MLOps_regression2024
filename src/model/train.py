@@ -37,9 +37,6 @@ reg = Ridge()
 reg.fit(X_train, y_train)
 y_pred = reg.predict(X_test)
 
-# Instalar W&B
-pip install wandb -qU
-
 # Inicializar la ejecución de W&B
 run = wandb.init(project='MLOps_regression2024', name="regression")
 
