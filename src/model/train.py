@@ -13,7 +13,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils.class_weight import compute_class_weight
 from sklearn.exceptions import ConvergenceWarning
 
-
 warnings.filterwarnings("ignore", category=ConvergenceWarning)
 
 # Paso 0: Instalar W&B
