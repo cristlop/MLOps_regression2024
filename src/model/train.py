@@ -15,13 +15,6 @@ from sklearn.exceptions import ConvergenceWarning
 
 warnings.filterwarnings("ignore", category=ConvergenceWarning)
 
-# Paso 0: Instalar W&B
-!pip instalar wandb -qU
-
-# Paso 1: Importar W&B e iniciar sesión
-import wandb
-wandb.login()
-
 # Regresión
 
 # Echamos un vistazo a un ejemplo rápido
